@@ -15,6 +15,9 @@ interface TodoType{
 const App = () => {
   const [todo,setTodo]= useState<TodoType[]>([])
   const [input , setInput] = useState('')
+  const [work , setWork] = useState(0)
+  
+
 
   //Create TODO
   const createTodo  = async (e:React.FormEvent<HTMLFormElement>)=>{
@@ -58,7 +61,15 @@ const App = () => {
   const deleteTodo = async(id:string)=>{
     await deleteDoc(doc(db,"todos",id))
   }
-  console.log(todo.map((item)=>item.completed))
+
+  useEffect(() => {
+  
+    const incompleteCount = todo.filter(t => !t.completed).length;
+    setWork(incompleteCount); 
+  }, [todo]); 
+    
+  
+  
   return (
     <div className="h-screen w-screen p-4 bg-teal-300 overflow-y-scroll">
       <div className="bg-slate-100 max-w-[500px] w-full m-auto rounded-md shadow-xl p-4">
@@ -72,7 +83,7 @@ const App = () => {
               toggleComplete={toggleComplete}
               />
             ))}
-            <p className="text-center">{`You Have  things to complete`}</p>
+            <p className="text-center">{`You Have ${work} things to complete`}</p>
           </ul>
       </div>
     </div>
