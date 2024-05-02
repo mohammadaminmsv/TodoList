@@ -1,13 +1,13 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { FormEventHandler } from 'react';
+
 
 interface formTodo {
     input : string
     setInput : (input : string) => void
-    createTodo : FormEventHandler<HTMLImageElement>
+    createTodo : (e : React.FormEvent<HTMLFormElement>)=>void
 }
 
-const Form = ({createTodo , input , setInput} : formTodo) => {
+const Form : React.FC<formTodo>= ({createTodo , input , setInput} : formTodo) => {
   return (
     <div>
         <form  onSubmit={createTodo} className='flex justify-between bg-teal-300 p-4 rounded-lg items-center'>

@@ -1,9 +1,8 @@
-import { FormEvent, FormEventHandler, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import Form from "./assets/Component/Form"
 import Todo from "./assets/Component/Todo"
-import { collection,addDoc, deleteDoc, onSnapshot , doc, query, QuerySnapshot, updateDoc } from "firebase/firestore"
+import { collection,addDoc, deleteDoc, onSnapshot , doc, query, updateDoc } from "firebase/firestore"
 import { db } from "./assets/Component/Firebase"
-import { Input } from "@mui/material"
 
 
 interface TodoType{
@@ -18,7 +17,7 @@ const App = () => {
   const [input , setInput] = useState('')
 
   //Create TODO
-  const createTodo  = async (e:FormEvent<HTMLInputElement>)=>{
+  const createTodo  = async (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     if(input === ""){
       alert('please fill')
